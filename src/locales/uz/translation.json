@@ -1,0 +1,433 @@
+{
+  "app": {
+    "name": "Smart Salon",
+    "tagline": "Premium go'zallik saloni boshqaruv platformasi"
+  },
+  "common": {
+    "loading": "Yuklanmoqda...",
+    "save": "Saqlash",
+    "cancel": "Bekor qilish",
+    "delete": "O'chirish",
+    "edit": "Tahrirlash",
+    "back": "Orqaga",
+    "next": "Keyingi",
+    "continue": "Davom etish",
+    "submit": "Yuborish",
+    "search": "Qidirish",
+    "language": "Til",
+    "theme": "Mavzu",
+    "copy": "Nusxalash",
+    "copied": "Nusxalandi",
+    "yes": "Ha",
+    "retry": "Qayta urinish",
+    "no": "Yo'q",
+    "confirm": "Tasdiqlash"
+  },
+  "auth": {
+    "login": "Kirish",
+    "logout": "Chiqish",
+    "loginWithGoogle": "Google bilan kirish",
+    "welcomeBack": "Xush kelibsiz!",
+    "loginSubtitle": "Hisobingizga kirish uchun Google orqali davom eting",
+    "loggingIn": "Kirilmoqda...",
+    "errors": {
+      "generic": "Xato yuz berdi. Qayta urinib ko'ring.",
+      "noConfig": "Firebase sozlamalari to'liq emas. .env faylini tekshiring."
+    }
+  },
+  "roles": {
+    "big_admin": "Bosh Admin",
+    "salon_owner": "Salon Rahbari",
+    "master": "Master",
+    "customer": "Mijoz"
+  },
+  "nav": {
+    "home": "Bosh sahifa",
+    "salons": "Salonlar",
+    "bookings": "Buyurtmalar",
+    "profile": "Profil",
+    "dashboard": "Boshqaruv",
+    "services": "Xizmatlar",
+    "masters": "Masterlar",
+    "invitations": "Taklifnomalar",
+    "schedule": "Jadval",
+    "report": "Hisobot",
+    "analytics": "Analitika",
+    "owners": "Salon egalari",
+    "subscriptions": "Obunalar"
+  },
+  "onboarding": {
+    "stepOf": "{{current}}/{{total}}-qadam",
+    "roleSelect": {
+      "title": "Kim sifatida kirmoqchisiz?",
+      "subtitle": "Tizimdan foydalanish maqsadingizni tanlang. Bu keyinchalik o'zgartirib bo'lmaydi.",
+      "customer": {
+        "title": "Mijoz",
+        "desc": "Salonlarni topish, masterni tanlash va navbatga yozilish"
+      },
+      "master": {
+        "title": "Master",
+        "desc": "Salonda ishlayman, rahbar bergan taklif username'im bor"
+      },
+      "salon_owner": {
+        "title": "Salon Rahbari",
+        "desc": "O'z salonimni boshqaraman va masterlarimni qo'shaman"
+      }
+    },
+    "form": {
+      "firstName": "Ism",
+      "lastName": "Familiya",
+      "phone": "Telefon raqam",
+      "phonePlaceholder": "90 123 45 67",
+      "username": "Username",
+      "usernameHelp": "Faqat kichik lotin harflari, raqamlar va defis (-). 3-24 ta belgi.",
+      "ownerUsernameHelp": "Bu sizning salon ommaviy manzilingiz: smartsalon.uz/s/sizning-username",
+      "masterInviteUsername": "Taklif username",
+      "masterInviteHelp": "Salon rahbaringiz sizga bergan username'ni kiriting"
+    },
+    "customer": {
+      "title": "Mijoz profilingiz",
+      "subtitle": "O'zingiz haqingizda qisqacha ma'lumot kiriting"
+    },
+    "owner": {
+      "title": "Salon rahbari profilingiz",
+      "subtitle": "Salon yaratamiz va sizning ma'lumotlaringizni saqlaymiz",
+      "trialNote": "Ro'yxatdan o'tgach 30 kunlik bepul sinov muddati boshlanadi. Sinov tugagach Bosh Admin tasdiqlashi kerak."
+    },
+    "master": {
+      "title": "Master profilingiz",
+      "subtitle": "Salon rahbaringiz bergan taklif username orqali salonga bog'lanasiz"
+    },
+    "errors": {
+      "required": "Bu maydon to'ldirilishi shart",
+      "phone": "9 ta raqam kiriting (masalan: 901234567)",
+      "username": "Username 3-24 ta kichik lotin harf, raqam yoki defis (-) dan iborat bo'lishi kerak",
+      "USERNAME_TAKEN": "Bu username allaqachon band",
+      "INVALID_USERNAME": "Username noto'g'ri formatda",
+      "INVITE_NOT_FOUND": "Bunday taklif username topilmadi",
+      "INVITE_ALREADY_CLAIMED": "Bu taklif username allaqachon ishlatilgan",
+      "ALREADY_ONBOARDED": "Siz allaqachon ro'yxatdan o'tgansiz",
+      "NOT_SIGNED_IN": "Tizimga kirilmagan",
+      "generic": "Xato yuz berdi. Qayta urinib ko'ring."
+    }
+  },
+  "customer": {
+    "salons": {
+      "subtitle": "Salonlarni toping va masterni tanlang",
+      "searchPlaceholder": "Salon yoki master ismi, username bo'yicha qidiring...",
+      "masters": "Masterlar",
+      "noMasters": "Hozircha master yo'q",
+      "empty": "Hozircha faol salon yo'q",
+      "emptySearch": "Salon yoki master topilmadi",
+      "openSalon": "Salon sahifasini ochish",
+      "error": "Salonlarni yuklab bo'lmadi. Qayta urinib ko'ring."
+    },
+    "salonProfile": {
+      "backToSalons": "Bosh sahifaga qaytish",
+      "notFound": "Salon yoki master topilmadi",
+      "error": "Ma'lumotlarni yuklab bo'lmadi. Qayta urinib ko'ring.",
+      "salonAccount": "Salon",
+      "ownerAccount": "Salon egasi",
+      "masterAccount": "Master",
+      "services": "Xizmatlar",
+      "noPhone": "Telefon ko'rsatilmagan",
+      "noAddress": "Manzil ko'rsatilmagan",
+      "book": "Yozilish",
+      "workingHours": "Ish vaqtlari",
+      "closed": "Yopiq",
+      "hoursRange": "{{open}} — {{close}}",
+      "reviews": "Sharhlar",
+      "reviewsCount": "{{count}} ta sharh",
+      "noReviews": "Hozircha sharh yo'q",
+      "anonymous": "Mijoz",
+      "salonServices": "Salon xizmatlari",
+      "masters": "Masterlar",
+      "noMasterServices": "Bu master hozircha xizmat qo'shmagan",
+      "bookHint": "Xizmatni tanlang va vaqt belgilang",
+      "bookTitle": "Band qilish",
+      "bookConfirm": "Davom etish",
+      "bookSelectService": "Avval xizmatni tanlang yoki pastdagi ro'yxatdan birini bosing.",
+      "noServices": "Hozircha band qilish uchun xizmat yo'q",
+      "ownerName": "Egasi: {{name}}",
+      "withMaster": "Master: {{name}}",
+      "weekdays": {
+        "mon": "Dushanba",
+        "tue": "Seshanba",
+        "wed": "Chorshanba",
+        "thu": "Payshanba",
+        "fri": "Juma",
+        "sat": "Shanba",
+        "sun": "Yakshanba"
+      }
+    }
+  },
+  "services": {
+    "addTitle": "Xizmat qo'shish",
+    "editTitle": "Xizmatni tahrirlash",
+    "addButton": "Qo'shish",
+    "addSuccess": "Xizmat qo'shildi",
+    "editSuccess": "Xizmat yangilandi",
+    "deleteSuccess": "Xizmat o'chirildi",
+    "deleteConfirm": "\"{{name}}\" xizmatini o'chirishni tasdiqlaysizmi?",
+    "listTitle": "Xizmatlar",
+    "listSubtitle": "Qo'shilgan xizmatlar ro'yxati",
+    "masterSubtitle": "Mijozlar uchun o'z xizmatlaringizni yarating",
+    "salonSubtitle": "Salon uchun umumiy xizmatlarni yarating",
+    "salonPageSubtitle": "Saloningiz xizmatlarini boshqaring",
+    "masterServicesTitle": "Masterlar xizmatlari",
+    "masterServicesSubtitle": "Har bir master qo'shgan xizmatlar alohida ko'rsatiladi",
+    "masterServiceCount": "{{count}} ta xizmat",
+    "noMasterServices": "Hozircha masterlar xizmat qo'shmagan",
+    "empty": "Hozircha xizmat yo'q",
+    "form": {
+      "name": "Xizmat nomi",
+      "namePlaceholder": "Masalan: Soch olish",
+      "price": "Narxi (so'm)",
+      "duration": "Davomiyligi"
+    },
+    "durationPresets": {
+      "20": "20 daqiqa",
+      "30": "30 daqiqa",
+      "40": "40 daqiqa",
+      "60": "1 soat",
+      "120": "2 soat",
+      "120plus": "2+ soat"
+    },
+    "errors": {
+      "nameRequired": "Xizmat nomini kiriting",
+      "priceRequired": "Narxni kiriting",
+      "durationRequired": "Davomiylikni tanlang",
+      "generic": "Amalni bajarib bo'lmadi. Firebase Rules yangilanganligini tekshiring."
+    }
+  },
+  "bigAdmin": {
+    "owners": {
+      "title": "Salon egalari",
+      "subtitle": "Barcha salon rahbarlari, sinov muddati va akkaunt holati",
+      "tableName": "Ism",
+      "tableUsername": "Username",
+      "tablePhone": "Telefon",
+      "tableEmail": "Email",
+      "tableRegistered": "Ro'yxatdan o'tgan",
+      "tableTrialStatus": "Sinov holati",
+      "tableDaysLeft": "Qolgan kun",
+      "tableAccount": "Akkaunt",
+      "tableActions": "Amallar",
+      "statusActive": "Faol",
+      "statusBlocked": "Bloklangan",
+      "block": "Bloklash",
+      "unblock": "Blokdan chiqarish",
+      "blockConfirm": "{{name}} ni bloklashni tasdiqlaysizmi? U tizimga kira olmaydi.",
+      "unblockConfirm": "{{name}} ni blokdan chiqarishni tasdiqlaysizmi?",
+      "empty": "Hozircha salon egasi yo'q",
+      "errors": {
+        "generic": "Ma'lumotlarni yuklab bo'lmadi. Qayta urinib ko'ring."
+      }
+    }
+  },
+  "salonOwner": {
+    "trial": {
+      "status": "Sinov holati",
+      "daysLeft": "{{count}} kun qoldi",
+      "expired": "Sinov muddati tugadi",
+      "approved": "Tasdiqlangan",
+      "pendingApproval": "Bosh Admin tasdiqi kutilmoqda",
+      "rejected": "Rad etilgan",
+      "trialActive": "Sinov muddati faol"
+    },
+    "publicUrl": "Sizning salon manzilingiz",
+    "settings": {
+      "title": "Salon boshqaruvi",
+      "subtitle": "Salon nomi va ish vaqtlarini mijozlar ko'rishi uchun sozlang",
+      "salonName": "Salon nomi",
+      "salonNameHint": "Bo'sh qoldirsangiz, @username ko'rsatiladi",
+      "salonNamePlaceholder": "Masalan: Beauty Studio",
+      "phone": "Telefon raqami",
+      "address": "Manzil",
+      "addressPlaceholder": "Masalan: Toshkent, Chilonzor 5-mavze",
+      "workingHours": "Ish vaqtlari",
+      "open": "Ochiq",
+      "saveSuccess": "Sozlamalar saqlandi",
+      "errors": {
+        "load": "Salon ma'lumotlarini yuklab bo'lmadi",
+        "save": "Saqlab bo'lmadi. Qayta urinib ko'ring."
+      }
+    },
+    "masters": {
+      "title": "Masterlar",
+      "subtitle": "Saloningizga ulangan barcha masterlar. Blok qilingan master tizimga kira olmaydi.",
+      "empty": "Hozircha master yo'q",
+      "emptyHint": "Taklifnomalar bo'limida username yarating va master ro'yxatdan o'tsin.",
+      "block": "Bloklash",
+      "unblock": "Blokdan chiqarish",
+      "statusBlocked": "Bloklangan",
+      "blockConfirm": "{{name}} ni bloklashni tasdiqlaysizmi? U tizimga kira olmaydi.",
+      "unblockConfirm": "{{name}} ni blokdan chiqarishni tasdiqlaysizmi?",
+      "errors": {
+        "generic": "Xato yuz berdi. Qayta urinib ko'ring.",
+        "permission": "Ruxsat yo'q. Firebase Rules va indexlarni yangilang (firestore.rules Publish qiling)."
+      }
+    },
+    "invitations": {
+      "title": "Masterlar uchun taklifnomalar",
+      "subtitle": "Master uchun yangi username yarating. Master bu username orqali ro'yxatdan o'tib, sizning saloningizga bog'lanadi.",
+      "createTitle": "Yangi taklif yaratish",
+      "create": "Taklif yaratish",
+      "createSuccess": "Taklif yaratildi",
+      "tableUsername": "Username",
+      "tableStatus": "Holat",
+      "tableCreated": "Yaratilgan sana",
+      "tableActions": "Amallar",
+      "statusPending": "Kutilmoqda",
+      "statusClaimed": "Bog'langan",
+      "deleteConfirm": "Ushbu @{{username}} taklifini o'chirishni tasdiqlaysizmi?",
+      "deleteClaimedConfirm": "@{{username}} allaqachon ishlatilgan. O'chirsangiz master salondan ajraladi va bloklanadi. Davom etasizmi?",
+      "deleteSuccess": "Taklif username o'chirildi",
+      "deleteError": "O'chirib bo'lmadi. Firebase Rules yangilanganligini tekshiring.",
+      "empty": "Hozircha taklifnoma yo'q. Yangi yarating."
+    }
+  },
+  "bookings": {
+    "customerSubtitle": "Kelajakdagi va o'tgan band qilishlaringiz",
+    "masterSubtitle": "Mijozlardan kelgan band qilishlar",
+    "ownerSubtitle": "Saloningizdagi barcha buyurtmalar",
+    "masterEmpty": "Hozircha band qilish yo'q",
+    "ownerEmpty": "Hozircha buyurtma yo'q",
+    "withMaster": "Master: {{name}}",
+    "empty": "Hozircha band qilish yo'q",
+    "browseSalons": "Salonlarni ko'rish",
+    "filterToday": "Bugungi",
+    "filterAll": "Hammasi",
+    "emptyToday": "Bugun buyurtma yo'q",
+    "emptyDay": "Bu kunda buyurtma yo'q",
+    "pickDate": "Sanani tanlang",
+    "upcoming": "Kelgusi",
+    "past": "O'tgan",
+    "active": "Faol buyurtmalar",
+    "pending": "Tasdiqlash kutilmoqda",
+    "history": "Tarix",
+    "createSuccess": "Band qilish muvaffaqiyatli yaratildi!",
+    "editTitle": "Band qilishni tahrirlash",
+    "deleteTitle": "Band qilishni o'chirish",
+    "deleteConfirm": "\"{{service}}\" band qilishini o'chirasizmi?",
+    "start": "Boshlash",
+    "finish": "Tugatish",
+    "customerInfo": "Mijoz ma'lumotlari",
+    "confirm": "Tasdiqlash",
+    "confirmTitle": "Band qilishni tasdiqlash",
+    "confirmMessage": "\"{{service}}\" xizmati uchun band qilishni tasdiqlaysizmi?",
+    "cancel": "Bekor qilish",
+    "cancelTitle": "Band qilishni bekor qilish",
+    "cancelConfirm": "\"{{service}}\" band qilishini bekor qilasizmi?",
+    "customerFallback": "Mijoz",
+    "status": {
+      "pending": "Kutilmoqda",
+      "in_progress": "Jarayonda",
+      "completed": "Tugallangan",
+      "confirmed": "Tasdiqlangan",
+      "cancelled": "Bekor qilingan"
+    },
+    "chat": {
+      "title": "Buyurtma bo'yicha chat",
+      "inbox": "Xabarlar",
+      "open": "Chat",
+      "hide": "Chatni yopish",
+      "back": "Orqaga",
+      "you": "Siz",
+      "noMessagesYet": "Hozircha xabar yo'q",
+      "selectConversation": "Suhbatni tanlang yoki yangi xabar yozing",
+      "placeholder": "Xabar yozing...",
+      "send": "Yuborish",
+      "empty": "Hozircha xabar yo'q. Birinchi xabarni yozing.",
+      "loadError": "Xabarlarni yuklab bo'lmadi.",
+      "sendError": "Xabar yuborib bo'lmadi.",
+      "closed": "Buyurtma tugagan — chat faqat o'qish uchun."
+    },
+    "flow": {
+      "title": "Band qilish",
+      "pickService": "Xizmatni tanlang",
+      "pickDate": "Sanani tanlang",
+      "pickTime": "Vaqtni kiriting",
+      "confirm": "Band qilish"
+    },
+    "errors": {
+      "load": "Band qilishlarni yuklab bo'lmadi",
+      "permission": "Ruxsat yo'q. Firebase qoidalarini yangilang: firebase deploy --only firestore:rules",
+      "index": "Firestore index kerak. Ishga tushiring: firebase deploy --only firestore:indexes",
+      "create": "Band qilish yaratib bo'lmadi",
+      "update": "Tahrirlab bo'lmadi",
+      "delete": "O'chirib bo'lmadi",
+      "pastTime": "Kelajakdagi sana va vaqtni tanlang",
+      "cancel": "Bekor qilib bo'lmadi",
+      "action": "Amalni bajarib bo'lmadi"
+    }
+  },
+  "theme": {
+    "label": "Mavzu",
+    "dark": "Qorong'i rejim",
+    "light": "Yorug' rejim"
+  },
+  "report": {
+    "subtitle": "Tanlangan davrdagi ish natijalari",
+    "fromDate": "Boshlanish sanasi",
+    "toDate": "Tugash sanasi",
+    "clientCount": "Mijozlar soni",
+    "workHours": "Ish vaqti",
+    "hoursValue": "{{hours}} soat",
+    "totalPrice": "Jami narx",
+    "invalidRange": "Boshlanish sanasi tugash sanasidan keyin bo'lmasligi kerak",
+    "completedSection": "Tugallangan mijozlar",
+    "empty": "Bu davrda tugallangan buyurtma yo'q"
+  },
+  "pages": {
+    "home": {
+      "heroTitle": "Go'zallik dunyosiga bir qadam",
+      "heroSubtitle": "Salonni topish, masterni tanlash va navbatga yozilish endi bir necha soniya ichida.",
+      "ctaPrimary": "Hoziroq boshlash",
+      "ctaSecondary": "Batafsil"
+    },
+    "unauthorized": {
+      "title": "Ruxsat yo'q",
+      "description": "Ushbu sahifaga kirish uchun sizda yetarli huquqlar yo'q.",
+      "goHome": "Bosh sahifaga qaytish"
+    },
+    "notFound": {
+      "title": "Sahifa topilmadi",
+      "description": "Qidirayotgan sahifa mavjud emas yoki ko'chirilgan.",
+      "goHome": "Bosh sahifaga qaytish"
+    },
+    "accountDisabled": {
+      "title": "Akkaunt bloklangan",
+      "description": "Salon rahbaringiz sizning akkauntingizni vaqtincha bloklagan. Qo'shimcha ma'lumot uchun salon bilan bog'laning."
+    },
+    "dashboard": {
+      "welcome": "Xush kelibsiz, {{name}}!",
+      "comingSoon": "Bu bo'lim keyingi bosqichda to'ldiriladi."
+    },
+    "profile": {
+      "title": "Profil",
+      "subtitle": "Ro'yxatdan o'tishda kiritilgan ma'lumotlaringiz",
+      "email": "Email",
+      "registeredAt": "Ro'yxatdan o'tgan sana",
+      "salonUrl": "Salon manzili",
+      "noData": "—",
+      "saveSuccess": "Profil yangilandi",
+      "saveError": "Saqlab bo'lmadi. Qayta urinib ko'ring.",
+      "bio": "Bio",
+      "bioPlaceholder": "O'zingiz yoki saloningiz haqida qisqacha yozing...",
+      "bioHint": "Mijozlar buni ko'radi. Maksimal 500 belgi.",
+      "uploadPhoto": "Rasm yuklash",
+      "uploadingPhoto": "Yuklanmoqda...",
+      "photoHint": "JPG, PNG yoki WebP (maks. 5 MB, avtomatik siqiladi)",
+      "photoUploadSuccess": "Profil rasmi yangilandi",
+      "photoUploadError": "Rasm yuklab bo'lmadi. Qayta urinib ko'ring.",
+      "photoErrors": {
+        "NO_FILE": "Fayl tanlanmadi",
+        "INVALID_TYPE": "Faqat rasm fayllari qabul qilinadi (JPG, PNG, WebP, GIF)",
+        "TOO_LARGE": "Fayl hajmi 5 MB dan katta bo'lmasligi kerak",
+        "NOT_SIGNED_IN": "Avval tizimga kiring",
+        "UPLOAD_FAILED": "Rasm yuklab bo'lmadi. Qayta urinib ko'ring."
+      }
+    }
+  }
+}

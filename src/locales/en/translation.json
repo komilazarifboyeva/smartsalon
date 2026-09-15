@@ -1,0 +1,433 @@
+{
+  "app": {
+    "name": "Smart Salon",
+    "tagline": "Premium beauty salon management platform"
+  },
+  "common": {
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "back": "Back",
+    "next": "Next",
+    "continue": "Continue",
+    "submit": "Submit",
+    "search": "Search",
+    "language": "Language",
+    "theme": "Theme",
+    "copy": "Copy",
+    "copied": "Copied",
+    "yes": "Yes",
+    "retry": "Retry",
+    "no": "No",
+    "confirm": "Confirm"
+  },
+  "auth": {
+    "login": "Sign in",
+    "logout": "Sign out",
+    "loginWithGoogle": "Continue with Google",
+    "welcomeBack": "Welcome back!",
+    "loginSubtitle": "Continue with Google to access your account",
+    "loggingIn": "Signing in...",
+    "errors": {
+      "generic": "Something went wrong. Please try again.",
+      "noConfig": "Firebase is not configured. Check your .env file."
+    }
+  },
+  "roles": {
+    "big_admin": "Super Admin",
+    "salon_owner": "Salon Owner",
+    "master": "Master",
+    "customer": "Customer"
+  },
+  "nav": {
+    "home": "Home",
+    "salons": "Salons",
+    "bookings": "Bookings",
+    "profile": "Profile",
+    "dashboard": "Dashboard",
+    "services": "Services",
+    "masters": "Masters",
+    "invitations": "Invitations",
+    "schedule": "Schedule",
+    "report": "Report",
+    "analytics": "Analytics",
+    "owners": "Salon owners",
+    "subscriptions": "Subscriptions"
+  },
+  "onboarding": {
+    "stepOf": "Step {{current}} of {{total}}",
+    "roleSelect": {
+      "title": "How would you like to use Smart Salon?",
+      "subtitle": "Choose your account type. This can't be changed later.",
+      "customer": {
+        "title": "Customer",
+        "desc": "Discover salons, choose a master, and book appointments"
+      },
+      "master": {
+        "title": "Master",
+        "desc": "I work at a salon and have an invite username from my manager"
+      },
+      "salon_owner": {
+        "title": "Salon Owner",
+        "desc": "I manage my own salon and add masters"
+      }
+    },
+    "form": {
+      "firstName": "First name",
+      "lastName": "Last name",
+      "phone": "Phone number",
+      "phonePlaceholder": "90 123 45 67",
+      "username": "Username",
+      "usernameHelp": "Lowercase letters, numbers and hyphen (-) only. 3-24 characters.",
+      "ownerUsernameHelp": "This is your public salon URL: smartsalon.uz/s/your-username",
+      "masterInviteUsername": "Invite username",
+      "masterInviteHelp": "Enter the username your salon owner gave you"
+    },
+    "customer": {
+      "title": "Customer profile",
+      "subtitle": "Tell us a bit about yourself"
+    },
+    "owner": {
+      "title": "Salon owner profile",
+      "subtitle": "We'll create your salon and save your details",
+      "trialNote": "After signup, a 30-day free trial begins. After the trial ends, Super Admin approval is required."
+    },
+    "master": {
+      "title": "Master profile",
+      "subtitle": "You'll be linked to a salon via the invite username"
+    },
+    "errors": {
+      "required": "This field is required",
+      "phone": "Enter 9 digits (e.g. 901234567)",
+      "username": "Username must be 3-24 lowercase letters, numbers or hyphens (-)",
+      "USERNAME_TAKEN": "This username is already taken",
+      "INVALID_USERNAME": "Invalid username format",
+      "INVITE_NOT_FOUND": "Invite username not found",
+      "INVITE_ALREADY_CLAIMED": "This invite has already been used",
+      "ALREADY_ONBOARDED": "You're already onboarded",
+      "NOT_SIGNED_IN": "Not signed in",
+      "generic": "Something went wrong. Please try again."
+    }
+  },
+  "customer": {
+    "salons": {
+      "subtitle": "Find salons and choose your master",
+      "searchPlaceholder": "Search by salon, master name, or username...",
+      "masters": "Masters",
+      "noMasters": "No masters yet",
+      "empty": "No active salons yet",
+      "emptySearch": "No master matched your search",
+      "openSalon": "Open salon page",
+      "error": "Could not load salons. Please try again."
+    },
+    "salonProfile": {
+      "backToSalons": "Back to home",
+      "notFound": "Salon or master not found",
+      "error": "Could not load profile. Please try again.",
+      "salonAccount": "Salon",
+      "ownerAccount": "Salon owner",
+      "masterAccount": "Master",
+      "services": "Services",
+      "noPhone": "No phone listed",
+      "noAddress": "No address listed",
+      "workingHours": "Working hours",
+      "closed": "Closed",
+      "hoursRange": "{{open}} — {{close}}",
+      "reviews": "Reviews",
+      "reviewsCount": "{{count}} reviews",
+      "noReviews": "No reviews yet",
+      "anonymous": "Customer",
+      "salonServices": "Salon services",
+      "masters": "Masters",
+      "noMasterServices": "This master has not added services yet",
+      "book": "Book",
+      "bookHint": "Choose a service and time",
+      "bookTitle": "Book appointment",
+      "bookConfirm": "Continue",
+      "bookSelectService": "Select a service from the list below first.",
+      "noServices": "No bookable services yet",
+      "ownerName": "Owner: {{name}}",
+      "withMaster": "Master: {{name}}",
+      "weekdays": {
+        "mon": "Monday",
+        "tue": "Tuesday",
+        "wed": "Wednesday",
+        "thu": "Thursday",
+        "fri": "Friday",
+        "sat": "Saturday",
+        "sun": "Sunday"
+      }
+    }
+  },
+  "services": {
+    "addTitle": "Add service",
+    "editTitle": "Edit service",
+    "addButton": "Add",
+    "addSuccess": "Service added",
+    "editSuccess": "Service updated",
+    "deleteSuccess": "Service deleted",
+    "deleteConfirm": "Delete \"{{name}}\"?",
+    "listTitle": "Services",
+    "listSubtitle": "List of added services",
+    "masterSubtitle": "Create services for your clients",
+    "salonSubtitle": "Create salon-wide services",
+    "salonPageSubtitle": "Manage your salon services",
+    "masterServicesTitle": "Master services",
+    "masterServicesSubtitle": "Each master's services are shown separately",
+    "masterServiceCount": "{{count}} services",
+    "noMasterServices": "No master has added services yet",
+    "empty": "No services yet",
+    "form": {
+      "name": "Service name",
+      "namePlaceholder": "e.g. Haircut",
+      "price": "Price (UZS)",
+      "duration": "Duration"
+    },
+    "durationPresets": {
+      "20": "20 minutes",
+      "30": "30 minutes",
+      "40": "40 minutes",
+      "60": "1 hour",
+      "120": "2 hours",
+      "120plus": "2+ hours"
+    },
+    "errors": {
+      "nameRequired": "Enter service name",
+      "priceRequired": "Enter price",
+      "durationRequired": "Select duration",
+      "generic": "Could not complete the action. Check Firestore Rules are published."
+    }
+  },
+  "bigAdmin": {
+    "owners": {
+      "title": "Salon Owners",
+      "subtitle": "All salon owners, trial period, and account status",
+      "tableName": "Name",
+      "tableUsername": "Username",
+      "tablePhone": "Phone",
+      "tableEmail": "Email",
+      "tableRegistered": "Registered",
+      "tableTrialStatus": "Trial status",
+      "tableDaysLeft": "Days left",
+      "tableAccount": "Account",
+      "tableActions": "Actions",
+      "statusActive": "Active",
+      "statusBlocked": "Blocked",
+      "block": "Block",
+      "unblock": "Unblock",
+      "blockConfirm": "Block {{name}}? They won't be able to sign in.",
+      "unblockConfirm": "Unblock {{name}}?",
+      "empty": "No salon owners yet",
+      "errors": {
+        "generic": "Could not load data. Please try again."
+      }
+    }
+  },
+  "salonOwner": {
+    "trial": {
+      "status": "Trial status",
+      "daysLeft": "{{count}} days left",
+      "expired": "Trial has expired",
+      "approved": "Approved",
+      "pendingApproval": "Awaiting Super Admin approval",
+      "rejected": "Rejected",
+      "trialActive": "Trial is active"
+    },
+    "publicUrl": "Your salon URL",
+    "settings": {
+      "title": "Salon management",
+      "subtitle": "Set your salon name and working hours for customers",
+      "salonName": "Salon name",
+      "salonNameHint": "If empty, @username will be shown",
+      "salonNamePlaceholder": "e.g. Beauty Studio",
+      "phone": "Phone number",
+      "address": "Address",
+      "addressPlaceholder": "e.g. Tashkent, Chilonzor",
+      "workingHours": "Working hours",
+      "open": "Open",
+      "saveSuccess": "Settings saved",
+      "errors": {
+        "load": "Could not load salon data",
+        "save": "Could not save. Please try again."
+      }
+    },
+    "masters": {
+      "title": "Masters",
+      "subtitle": "All masters linked to your salon. A blocked master cannot sign in.",
+      "empty": "No masters yet",
+      "emptyHint": "Create an invite username so a master can register and join your salon.",
+      "block": "Block",
+      "unblock": "Unblock",
+      "statusBlocked": "Blocked",
+      "blockConfirm": "Block {{name}}? They will not be able to sign in.",
+      "unblockConfirm": "Unblock {{name}}?",
+      "errors": {
+        "generic": "Something went wrong. Please try again.",
+        "permission": "Permission denied. Update Firestore Rules and indexes (Publish firestore.rules)."
+      }
+    },
+    "invitations": {
+      "title": "Master invitations",
+      "subtitle": "Create a new username for your master. The master signs up using this username and gets linked to your salon.",
+      "createTitle": "Create new invitation",
+      "create": "Create invitation",
+      "createSuccess": "Invitation created",
+      "tableUsername": "Username",
+      "tableStatus": "Status",
+      "tableCreated": "Created",
+      "tableActions": "Actions",
+      "statusPending": "Pending",
+      "statusClaimed": "Linked",
+      "deleteConfirm": "Delete invitation @{{username}}?",
+      "deleteClaimedConfirm": "@{{username}} is already in use. Deleting will unlink and block the master. Continue?",
+      "deleteSuccess": "Invitation username deleted",
+      "deleteError": "Could not delete. Check Firestore Rules are published.",
+      "empty": "No invitations yet. Create one to get started."
+    }
+  },
+  "bookings": {
+    "customerSubtitle": "Your upcoming and past appointments",
+    "masterSubtitle": "Bookings from customers",
+    "ownerSubtitle": "All salon bookings",
+    "masterEmpty": "No bookings yet",
+    "ownerEmpty": "No orders yet",
+    "withMaster": "Master: {{name}}",
+    "empty": "No bookings yet",
+    "browseSalons": "Browse salons",
+    "filterToday": "Today",
+    "filterAll": "All",
+    "emptyToday": "No bookings for today",
+    "emptyDay": "No bookings for this day",
+    "pickDate": "Pick a date",
+    "upcoming": "Upcoming",
+    "past": "Past",
+    "active": "Active bookings",
+    "pending": "Awaiting confirmation",
+    "history": "History",
+    "createSuccess": "Booking created successfully!",
+    "editTitle": "Edit booking",
+    "deleteTitle": "Delete booking",
+    "deleteConfirm": "Delete booking for \"{{service}}\"?",
+    "start": "Start",
+    "finish": "Finish",
+    "customerInfo": "Customer details",
+    "confirm": "Confirm",
+    "confirmTitle": "Confirm booking",
+    "confirmMessage": "Confirm booking for \"{{service}}\"?",
+    "cancel": "Cancel",
+    "cancelTitle": "Cancel booking",
+    "cancelConfirm": "Cancel booking for \"{{service}}\"?",
+    "customerFallback": "Customer",
+    "status": {
+      "pending": "Pending",
+      "in_progress": "In progress",
+      "completed": "Completed",
+      "confirmed": "Confirmed",
+      "cancelled": "Cancelled"
+    },
+    "chat": {
+      "title": "Booking chat",
+      "inbox": "Messages",
+      "open": "Chat",
+      "hide": "Hide chat",
+      "back": "Back",
+      "you": "You",
+      "noMessagesYet": "No messages yet",
+      "selectConversation": "Select a conversation or send a new message",
+      "placeholder": "Write a message...",
+      "send": "Send",
+      "empty": "No messages yet. Send the first one.",
+      "loadError": "Could not load messages.",
+      "sendError": "Could not send message.",
+      "closed": "Booking is finished — chat is read-only."
+    },
+    "flow": {
+      "title": "Book appointment",
+      "pickService": "Choose a service",
+      "pickDate": "Pick a date",
+      "pickTime": "Enter time",
+      "confirm": "Book"
+    },
+    "errors": {
+      "load": "Could not load bookings",
+      "permission": "Permission denied. Deploy rules: firebase deploy --only firestore:rules",
+      "index": "Firestore index required. Run: firebase deploy --only firestore:indexes",
+      "create": "Could not create booking",
+      "update": "Could not save changes",
+      "delete": "Could not delete",
+      "pastTime": "Choose a future date and time",
+      "cancel": "Could not cancel",
+      "action": "Could not complete action"
+    }
+  },
+  "theme": {
+    "label": "Theme",
+    "dark": "Dark mode",
+    "light": "Light mode"
+  },
+  "report": {
+    "subtitle": "Work results for the selected period",
+    "fromDate": "Start date",
+    "toDate": "End date",
+    "clientCount": "Clients",
+    "workHours": "Work time",
+    "hoursValue": "{{hours}} h",
+    "totalPrice": "Total revenue",
+    "invalidRange": "Start date cannot be after end date",
+    "completedSection": "Completed clients",
+    "empty": "No completed bookings in this period"
+  },
+  "pages": {
+    "home": {
+      "heroTitle": "One step into the world of beauty",
+      "heroSubtitle": "Find a salon, choose your master, and book — all in seconds.",
+      "ctaPrimary": "Get started",
+      "ctaSecondary": "Learn more"
+    },
+    "unauthorized": {
+      "title": "Access denied",
+      "description": "You don't have permission to view this page.",
+      "goHome": "Go home"
+    },
+    "notFound": {
+      "title": "Page not found",
+      "description": "The page you're looking for doesn't exist or has been moved.",
+      "goHome": "Go home"
+    },
+    "accountDisabled": {
+      "title": "Account blocked",
+      "description": "Your salon owner has temporarily blocked your account. Please contact the salon for details."
+    },
+    "dashboard": {
+      "welcome": "Welcome, {{name}}!",
+      "comingSoon": "This section will be filled in the next stage."
+    },
+    "profile": {
+      "title": "Profile",
+      "subtitle": "Information you provided during registration",
+      "email": "Email",
+      "registeredAt": "Registered on",
+      "salonUrl": "Salon URL",
+      "noData": "—",
+      "saveSuccess": "Profile updated",
+      "saveError": "Could not save. Please try again.",
+      "bio": "Bio",
+      "bioPlaceholder": "Write a short description about yourself or your salon...",
+      "bioHint": "Customers will see this. Max 500 characters.",
+      "uploadPhoto": "Upload photo",
+      "uploadingPhoto": "Uploading...",
+      "photoHint": "JPG, PNG or WebP (max 5 MB, auto-compressed)",
+      "photoUploadSuccess": "Profile photo updated",
+      "photoUploadError": "Could not upload photo. Please try again.",
+      "photoErrors": {
+        "NO_FILE": "No file selected",
+        "INVALID_TYPE": "Only image files are allowed (JPG, PNG, WebP, GIF)",
+        "TOO_LARGE": "File size must not exceed 5 MB",
+        "NOT_SIGNED_IN": "Please sign in first",
+        "UPLOAD_FAILED": "Could not upload photo. Please try again."
+      }
+    }
+  }
+}

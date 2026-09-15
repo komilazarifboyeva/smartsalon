@@ -1,0 +1,360 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ---------- Helper funksiyalar ----------
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwnerUid(uid) {
+      return isSignedIn() && request.auth.uid == uid;
+    }
+
+    function userDoc() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+    }
+
+    function userRole() {
+      return userDoc().role;
+    }
+
+    function userSalonId() {
+      return userDoc().salonId;
+    }
+
+    function isOnboarded() {
+      return userDoc().get('onboardingCompleted', false) == true;
+    }
+
+    function isBigAdmin() {
+      return isSignedIn() && userRole() == 'big_admin';
+    }
+
+    function isSalonOwner() {
+      return isSignedIn() && userRole() == 'salon_owner';
+    }
+
+    function isMaster() {
+      return isSignedIn() && userRole() == 'master';
+    }
+
+    function isCustomer() {
+      return isSignedIn() && userRole() == 'customer';
+    }
+
+    function isValidRole(r) {
+      return r in ['customer', 'salon_owner', 'master'];
+    }
+
+    // ---------- users/{uid} ----------
+    match /users/{uid} {
+      allow read: if isOwnerUid(uid)
+                     || isBigAdmin()
+                     || (isSalonOwner()
+                         && resource.data.role == 'master'
+                         && resource.data.salonId == userSalonId())
+                     || (
+                       isSignedIn()
+                       && resource.data.role == 'master'
+                       && resource.data.get('isDisabled', false) != true
+                       && resource.data.get('onboardingCompleted', false) == true
+                     );
+
+      // Boshlang'ich hujjat — Google bilan kirgan zahoti
+      allow create: if isOwnerUid(uid)
+                       && request.resource.data.uid == uid
+                       && request.resource.data.role == 'customer'
+                       && request.resource.data.onboardingCompleted == false;
+
+      // Onboarding yoki profil yangilash (o'zi)
+      allow update: if (
+        isOwnerUid(uid) && (
+          (
+            resource.data.get('onboardingCompleted', false) == false
+            && request.resource.data.onboardingCompleted == true
+            && isValidRole(request.resource.data.role)
+            && request.resource.data.uid == resource.data.uid
+          )
+          ||
+          (
+            resource.data.get('onboardingCompleted', false) == true
+            && request.resource.data.onboardingCompleted == true
+            && request.resource.data.role == resource.data.role
+            && request.resource.data.uid == resource.data.uid
+            && request.resource.data.get('salonId', null) == resource.data.get('salonId', null)
+            && request.resource.data.get('username', null) == resource.data.get('username', null)
+            && request.resource.data.diff(resource.data).affectedKeys()
+                 .hasOnly(['firstName', 'lastName', 'phone', 'photoURL', 'bio', 'updatedAt'])
+          )
+        )
+      ) || isBigAdmin()
+      || (
+        isSalonOwner()
+        && resource.data.role == 'master'
+        && resource.data.salonId == userSalonId()
+        && request.resource.data.role == 'master'
+        && request.resource.data.salonId == resource.data.salonId
+        && request.resource.data.get('isDisabled', false) is bool
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['isDisabled', 'updatedAt'])
+      )
+      || (
+        isSalonOwner()
+        && resource.data.role == 'master'
+        && resource.data.salonId == userSalonId()
+        && request.resource.data.role == 'master'
+        && request.resource.data.isDisabled == true
+        && request.resource.data.salonId == null
+        && request.resource.data.username == null
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['isDisabled', 'salonId', 'username', 'updatedAt'])
+      );
+
+      allow delete: if isBigAdmin();
+    }
+
+    // ---------- usernames/{username} ----------
+    // Bu kolleksiya ikki xil document'ni saqlaydi:
+    //   type='owner'         — salon rahbari o'z username'ini band qilgan
+    //   type='master_invite' — salon rahbari master uchun yaratgan taklif
+    match /usernames/{username} {
+      // Unikallikni tekshirish uchun barchaga o'qish ruxsat
+      allow read: if isSignedIn();
+
+      // Salon rahbari onboarding paytida o'z username'ini band qiladi
+      // (onboarding paytida foydalanuvchi roli hali 'customer', shuning uchun rolga emas, uid'ga tekshiramiz)
+      allow create: if isSignedIn()
+                       && request.resource.data.type == 'owner'
+                       && request.resource.data.uid == request.auth.uid
+                       && request.resource.data.username == username
+                       && userDoc().get('onboardingCompleted', false) == false;
+
+      // Salon rahbari master uchun taklif yaratadi
+      allow create: if isSalonOwner()
+                       && request.resource.data.type == 'master_invite'
+                       && request.resource.data.salonId == userSalonId()
+                       && request.resource.data.get('claimedBy', null) == null
+                       && request.resource.data.username == username;
+
+      // Master taklifni "claim" qiladi: claimedBy null → o'z uid
+      allow update: if isSignedIn()
+                       && resource.data.type == 'master_invite'
+                       && resource.data.get('claimedBy', null) == null
+                       && request.resource.data.claimedBy == request.auth.uid
+                       && request.resource.data.type == resource.data.type
+                       && request.resource.data.salonId == resource.data.salonId
+                       && request.resource.data.username == resource.data.username;
+
+      // Salon rahbari o'z salonidagi master taklifini o'chira oladi (claimed bo'lsa ham)
+      allow delete: if isSalonOwner()
+                       && resource.data.type == 'master_invite'
+                       && resource.data.salonId == userSalonId();
+    }
+
+    // ---------- salons/{salonId} ----------
+    match /salons/{salonId} {
+      // Hozircha barcha tizimga kirganlar o'qiy oladi (kelajakda ommaviy URL uchun yanada ochiq qilamiz)
+      allow read: if isSignedIn();
+
+      // Salon yaratish — onboarding paytida foydalanuvchining o'zi uchun
+      allow create: if isSignedIn()
+                       && request.resource.data.ownerId == request.auth.uid
+                       && userDoc().get('onboardingCompleted', false) == false;
+
+      // Salonni o'zgartirish — faqat salon egasi (nom, ish vaqtlari va hokazo)
+      allow update: if (
+        (
+          isSalonOwner()
+          && userSalonId() == salonId
+          && resource.data.ownerId == request.auth.uid
+          && request.resource.data.ownerId == resource.data.ownerId
+          && request.resource.data.diff(resource.data).affectedKeys()
+               .hasOnly([
+                 'name', 'workingHours', 'description', 'address', 'phone',
+                 'ownerFirstName', 'ownerLastName', 'ownerPhone', 'ownerBio', 'ownerPhotoURL',
+                 'updatedAt',
+               ])
+        )
+        || isBigAdmin()
+      );
+
+      allow delete: if isBigAdmin();
+
+      match /reviews/{reviewId} {
+        allow read: if isSignedIn();
+        allow write: if false;
+      }
+    }
+
+    // ---------- services/{serviceId} ----------
+    match /services/{serviceId} {
+      allow read: if isSignedIn() && (
+        isBigAdmin()
+        || isCustomer()
+        || (
+          resource.data.salonId == userSalonId()
+          && (
+            isSalonOwner()
+            || (isMaster() && resource.data.masterId == request.auth.uid)
+          )
+        )
+      );
+
+      allow create: if isSignedIn()
+        && request.resource.data.salonId == userSalonId()
+        && request.resource.data.createdBy == request.auth.uid
+        && request.resource.data.name is string
+        && request.resource.data.name.size() > 0
+        && request.resource.data.name.size() <= 100
+        && request.resource.data.price is number
+        && request.resource.data.price > 0
+        && request.resource.data.durationMinutes is number
+        && request.resource.data.durationMinutes >= 15
+        && request.resource.data.durationPreset is string
+        && (
+          (
+            isSalonOwner()
+            && request.resource.data.masterId == null
+          )
+          || (
+            isMaster()
+            && request.resource.data.masterId == request.auth.uid
+          )
+        );
+
+      allow update: if (
+        isBigAdmin()
+        || (
+          isSalonOwner()
+          && resource.data.salonId == userSalonId()
+          && resource.data.masterId == null
+        )
+        || (
+          isMaster()
+          && resource.data.salonId == userSalonId()
+          && resource.data.masterId == request.auth.uid
+        )
+      )
+        && request.resource.data.salonId == resource.data.salonId
+        && request.resource.data.masterId == resource.data.masterId
+        && request.resource.data.createdBy == resource.data.createdBy
+        && request.resource.data.name is string
+        && request.resource.data.name.size() > 0
+        && request.resource.data.name.size() <= 100
+        && request.resource.data.price is number
+        && request.resource.data.price > 0
+        && request.resource.data.durationMinutes is number
+        && request.resource.data.durationMinutes >= 15
+        && request.resource.data.durationPreset is string
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['name', 'price', 'durationMinutes', 'durationPreset', 'updatedAt']);
+
+      allow delete: if isBigAdmin()
+        || (
+          isSalonOwner()
+          && resource.data.salonId == userSalonId()
+          && resource.data.masterId == null
+        )
+        || (
+          isMaster()
+          && resource.data.salonId == userSalonId()
+          && resource.data.masterId == request.auth.uid
+        );
+    }
+
+    // ---------- bookings/{bookingId} ----------
+    match /bookings/{bookingId} {
+      allow read: if isSignedIn() && (
+        isBigAdmin()
+        || resource.data.customerId == request.auth.uid
+        || resource.data.masterId == request.auth.uid
+        || (
+          isSalonOwner()
+          && resource.data.salonId == userSalonId()
+        )
+      );
+
+      allow create: if isCustomer()
+        && request.resource.data.customerId == request.auth.uid
+        && request.resource.data.status == 'pending'
+        && request.resource.data.salonId is string
+        && request.resource.data.serviceId is string
+        && request.resource.data.serviceName is string
+        && request.resource.data.servicePrice is number
+        && request.resource.data.durationMinutes is number
+        && request.resource.data.durationMinutes >= 15
+        && request.resource.data.startAt is timestamp
+        && request.resource.data.endAt is timestamp
+        && request.resource.data.startAt > request.time - duration.value(2, 'm');
+
+      allow update: if (
+        isBigAdmin()
+        || (
+          isCustomer()
+          && resource.data.customerId == request.auth.uid
+          && resource.data.status == 'pending'
+          && request.resource.data.status == 'pending'
+          && request.resource.data.customerId == resource.data.customerId
+          && request.resource.data.salonId == resource.data.salonId
+          && request.resource.data.serviceId == resource.data.serviceId
+          && request.resource.data.startAt is timestamp
+          && request.resource.data.endAt is timestamp
+          && request.resource.data.startAt > request.time - duration.value(2, 'm')
+          && request.resource.data.diff(resource.data).affectedKeys()
+               .hasOnly(['startAt', 'endAt', 'updatedAt'])
+        )
+        || (
+          isCustomer()
+          && resource.data.customerId == request.auth.uid
+          && resource.data.status == 'pending'
+          && request.resource.data.status == 'cancelled'
+          && request.resource.data.customerId == resource.data.customerId
+          && request.resource.data.salonId == resource.data.salonId
+          && request.resource.data.diff(resource.data).affectedKeys()
+               .hasOnly(['status', 'updatedAt'])
+        )
+        || (
+          isMaster()
+          && resource.data.masterId == request.auth.uid
+          && resource.data.status == 'pending'
+          && request.resource.data.status == 'in_progress'
+          && request.resource.data.masterId == resource.data.masterId
+          && request.resource.data.diff(resource.data).affectedKeys()
+               .hasOnly(['status', 'startedAt', 'updatedAt'])
+        )
+        || (
+          isMaster()
+          && resource.data.masterId == request.auth.uid
+          && resource.data.status == 'in_progress'
+          && request.resource.data.status == 'completed'
+          && request.resource.data.masterId == resource.data.masterId
+          && request.resource.data.diff(resource.data).affectedKeys()
+               .hasOnly(['status', 'completedAt', 'updatedAt'])
+        )
+        || (
+          isSalonOwner()
+          && resource.data.salonId == userSalonId()
+          && resource.data.status in ['pending', 'in_progress']
+          && request.resource.data.status == 'cancelled'
+          && request.resource.data.salonId == resource.data.salonId
+          && request.resource.data.diff(resource.data).affectedKeys()
+               .hasOnly(['status', 'updatedAt'])
+        )
+      );
+
+      allow delete: if isBigAdmin()
+        || (
+          isCustomer()
+          && resource.data.customerId == request.auth.uid
+          && resource.data.status == 'pending'
+        );
+    }
+
+    // ---------- Boshqa kolleksiyalar (keyingi bosqichlarda ochiladi) ----------
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
