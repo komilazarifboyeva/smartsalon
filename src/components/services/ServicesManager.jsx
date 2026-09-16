@@ -6,6 +6,7 @@ import {
   Loader2,
   Pencil,
   Plus,
+  PlusCircle,
   Scissors,
   Trash2,
   Wallet,
@@ -169,7 +170,8 @@ function ServiceCard({ service, t, onEdit, onDelete, busyId }) {
 
 const EMPTY_FORM = { name: '', price: '', durationPreset: '30' };
 
-export default function ServicesManager({ scope }) {
+export default function ServicesManager({ scope, layout = 'full', titleKey = 'services.listTitle' }) {
+  const isCompact = layout === 'compact';
   const { t } = useTranslation();
   const { user, profile } = useAuth();
   const salonId = profile?.salonId;
@@ -184,6 +186,8 @@ export default function ServicesManager({ scope }) {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [durationPreset, setDurationPreset] = useState('30');
+
+  const [addOpen, setAddOpen] = useState(false);
 
   const [editTarget, setEditTarget] = useState(null);
   const [editName, setEditName] = useState('');
@@ -266,6 +270,7 @@ export default function ServicesManager({ scope }) {
         createdBy: user.uid,
       });
       resetAddForm();
+      setAddOpen(false);
       setSuccess('addSuccess');
       await reload();
     } catch (err) {
@@ -331,78 +336,139 @@ export default function ServicesManager({ scope }) {
     }
   }
 
+  const addFormFields = (
+    <ServiceFormFields
+      t={t}
+      name={name}
+      setName={setName}
+      price={price}
+      setPrice={setPrice}
+      durationPreset={durationPreset}
+      setDurationPreset={setDurationPreset}
+      onSelectPricePreset={(value) => setPrice(String(value))}
+    />
+  );
+
+  const errorBanner = error ? (
+    <p className="rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-xs text-red-700 dark:border-red-800 dark:bg-red-950/40 dark:text-red-400">
+      {t(`services.errors.${error}`, { defaultValue: t('services.errors.generic') })}
+    </p>
+  ) : null;
+
+  const successBanner = success ? (
+    <p className="rounded-xl border border-emerald-200 bg-emerald-50 px-3 py-2 text-xs text-emerald-700 dark:border-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-400">
+      {t(`services.${success}`)}
+    </p>
+  ) : null;
+
+  const submitButton = (
+    <button
+      type="submit"
+      className={cn('btn-primary', isCompact ? 'w-full' : 'w-full sm:w-auto')}
+      disabled={submitting}
+    >
+      {submitting ? <Loader2 className="size-4 animate-spin" /> : <Plus className="size-4" />}
+      {t('services.addButton')}
+    </button>
+  );
+
+  const serviceList = loading ? (
+    <div className="flex items-center justify-center py-12">
+      <Loader2 className="size-8 animate-spin text-brand-500" />
+    </div>
+  ) : services.length === 0 ? (
+    isCompact ? (
+      <p className="rounded-2xl border border-dashed border-slate-200 py-8 text-center text-sm text-slate-500 dark:border-slate-700 dark:text-white">
+        {t('services.empty')}
+      </p>
+    ) : (
+      <div className="card flex flex-col items-center justify-center py-12 text-center">
+        <div className="grid size-14 place-items-center rounded-2xl bg-slate-100 text-slate-400 dark:bg-slate-800 dark:text-white">
+          <Inbox className="size-7" />
+        </div>
+        <p className="mt-3 text-sm text-slate-500 dark:text-white">{t('services.empty')}</p>
+      </div>
+    )
+  ) : (
+    <div className={cn('grid gap-4', isCompact ? 'sm:grid-cols-2' : 'sm:grid-cols-2 lg:grid-cols-3')}>
+      {services.map((service) => (
+        <ServiceCard
+          key={service.id}
+          service={service}
+          t={t}
+          onEdit={openEditModal}
+          onDelete={setDeleteTarget}
+          busyId={busyId}
+        />
+      ))}
+    </div>
+  );
+
   return (
-    <div className="space-y-6">
-      <div className="card space-y-5">
-        <div>
-          <h2 className="text-lg font-bold text-slate-900 dark:text-white">{t('services.addTitle')}</h2>
-          <p className="mt-1 text-sm text-slate-600 dark:text-white">{t(`services.${scope}Subtitle`)}</p>
-        </div>
-
-        <form onSubmit={onSubmitAdd} className="space-y-5">
-          <ServiceFormFields
-            t={t}
-            name={name}
-            setName={setName}
-            price={price}
-            setPrice={setPrice}
-            durationPreset={durationPreset}
-            setDurationPreset={setDurationPreset}
-            onSelectPricePreset={(value) => setPrice(String(value))}
-          />
-
-          {error && (
-            <p className="rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-xs text-red-700 dark:border-red-800 dark:bg-red-950/40 dark:text-red-400">
-              {t(`services.errors.${error}`, { defaultValue: t('services.errors.generic') })}
-            </p>
-          )}
-
-          {success && (
-            <p className="rounded-xl border border-emerald-200 bg-emerald-50 px-3 py-2 text-xs text-emerald-700 dark:border-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-400">
-              {t(`services.${success}`)}
-            </p>
-          )}
-
-          <button type="submit" className="btn-primary w-full sm:w-auto" disabled={submitting}>
-            {submitting ? (
-              <Loader2 className="size-4 animate-spin" />
-            ) : (
-              <Plus className="size-4" />
-            )}
-            {t('services.addButton')}
-          </button>
-        </form>
-      </div>
-
-      <div>
-        <h2 className="text-lg font-bold text-slate-900 dark:text-white">{t('services.listTitle')}</h2>
-        <p className="mt-1 text-sm text-slate-600 dark:text-white">{t('services.listSubtitle')}</p>
-      </div>
-
-      {loading ? (
-        <div className="flex items-center justify-center py-12">
-          <Loader2 className="size-8 animate-spin text-brand-500" />
-        </div>
-      ) : services.length === 0 ? (
-        <div className="card flex flex-col items-center justify-center py-12 text-center">
-          <div className="grid size-14 place-items-center rounded-2xl bg-slate-100 text-slate-400 dark:bg-slate-800 dark:text-white">
-            <Inbox className="size-7" />
+    <div className={isCompact ? 'space-y-4' : 'space-y-6'}>
+      {!isCompact && (
+        <div className="card space-y-5">
+          <div>
+            <h2 className="text-lg font-bold text-slate-900 dark:text-white">{t('services.addTitle')}</h2>
+            <p className="mt-1 text-sm text-slate-600 dark:text-white">{t(`services.${scope}Subtitle`)}</p>
           </div>
-          <p className="mt-3 text-sm text-slate-500 dark:text-white">{t('services.empty')}</p>
+
+          <form onSubmit={onSubmitAdd} className="space-y-5">
+            {addFormFields}
+            {errorBanner}
+            {successBanner}
+            {submitButton}
+          </form>
         </div>
+      )}
+
+      {isCompact ? (
+        <h2 className="flex items-center gap-2 text-base font-bold text-slate-900 dark:text-white">
+          <Scissors className="size-5 text-brand-500" />
+          {t(titleKey)}
+        </h2>
       ) : (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((service) => (
-            <ServiceCard
-              key={service.id}
-              service={service}
-              t={t}
-              onEdit={openEditModal}
-              onDelete={setDeleteTarget}
-              busyId={busyId}
-            />
-          ))}
+        <div>
+          <h2 className="text-lg font-bold text-slate-900 dark:text-white">{t(titleKey)}</h2>
+          <p className="mt-1 text-sm text-slate-600 dark:text-white">{t('services.listSubtitle')}</p>
         </div>
+      )}
+
+      {serviceList}
+
+      {isCompact && (
+        <>
+          {!addOpen && errorBanner}
+          {!addOpen && successBanner}
+
+          <button
+            type="button"
+            onClick={() => {
+              setError(null);
+              setSuccess(null);
+              setAddOpen(true);
+            }}
+            className="flex w-full items-center justify-center gap-2 rounded-2xl border border-dashed border-brand-300 bg-white px-4 py-4 text-sm font-semibold text-brand-600 transition-colors hover:border-brand-500 hover:bg-brand-50 dark:border-brand-900/60 dark:bg-slate-900 dark:text-brand-400 dark:hover:bg-brand-950/30"
+          >
+            <PlusCircle className="size-5" />
+            {t('services.addCta')}
+          </button>
+
+          <Modal
+            open={addOpen}
+            onClose={() => !submitting && setAddOpen(false)}
+            title={t('services.addTitle')}
+            subtitle={t(`services.${scope}Subtitle`)}
+            size="lg"
+            hideClose={submitting}
+          >
+            <form onSubmit={onSubmitAdd} className="space-y-5">
+              {addFormFields}
+              {errorBanner}
+              {submitButton}
+            </form>
+          </Modal>
+        </>
       )}
 
       <Modal

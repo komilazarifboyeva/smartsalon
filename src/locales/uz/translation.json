@@ -21,7 +21,23 @@
     "yes": "Ha",
     "retry": "Qayta urinish",
     "no": "Yo'q",
-    "confirm": "Tasdiqlash"
+    "confirm": "Tasdiqlash",
+    "close": "Yopish",
+    "dayMonth": "{{day}}-{{monthLower}}",
+    "months": {
+      "1": "Yanvar",
+      "2": "Fevral",
+      "3": "Mart",
+      "4": "Aprel",
+      "5": "May",
+      "6": "Iyun",
+      "7": "Iyul",
+      "8": "Avgust",
+      "9": "Sentabr",
+      "10": "Oktabr",
+      "11": "Noyabr",
+      "12": "Dekabr"
+    }
   },
   "auth": {
     "login": "Kirish",
@@ -171,6 +187,7 @@
     "deleteConfirm": "\"{{name}}\" xizmatini o'chirishni tasdiqlaysizmi?",
     "listTitle": "Xizmatlar",
     "listSubtitle": "Qo'shilgan xizmatlar ro'yxati",
+    "addCta": "Servis qo'shish",
     "masterSubtitle": "Mijozlar uchun o'z xizmatlaringizni yarating",
     "salonSubtitle": "Salon uchun umumiy xizmatlarni yarating",
     "salonPageSubtitle": "Saloningiz xizmatlarini boshqaring",
@@ -285,6 +302,39 @@
       "deleteSuccess": "Taklif username o'chirildi",
       "deleteError": "O'chirib bo'lmadi. Firebase Rules yangilanganligini tekshiring.",
       "empty": "Hozircha taklifnoma yo'q. Yangi yarating."
+    }
+  },
+  "master": {
+    "tariff": {
+      "title": "Tarif",
+      "paymentDate": "To'lov sanasi",
+      "plans": {
+        "usta": "USTA"
+      },
+      "daysLeft": "To'lovgacha {{count}} kun qoldi. Har doimgidek, biz siz bilan birgamiz!",
+      "dueToday": "Bugun to'lov kuni. Hisobingizni tekshiring.",
+      "overdue": "To'lov muddati {{count}} kun oldin o'tdi"
+    },
+    "balance": {
+      "label": "Balans",
+      "warning": "Iltimos hisobingizni to'ldiring, aks holda profilingiz bloklanib qoladi",
+      "topUp": "Hisobni to'ldirish",
+      "topUpInfo": "Hisobni to'ldirish uchun Smart Salon administratoriga murojaat qiling. To'lov qabul qilingach, balans avtomatik yangilanadi."
+    },
+    "sms": {
+      "title": "SMS xabarlar",
+      "label": "Bu oyda yuborilgan smslar"
+    },
+    "services": {
+      "title": "Sizning xizmatlaringiz"
+    },
+    "stats": {
+      "currentMonth": "Hozirgi oy ({{month}})",
+      "completed": "Bajarilgan ishlar",
+      "cancelled": "Bekor qilinganlar",
+      "count": "{{count}} ta",
+      "details": "Batafsil",
+      "error": "Statistikani yuklab bo'lmadi. Qayta urinib ko'ring."
     }
   },
   "bookings": {

@@ -88,6 +88,20 @@ service cloud.firestore {
             && request.resource.data.diff(resource.data).affectedKeys()
                  .hasOnly(['firstName', 'lastName', 'phone', 'photoURL', 'bio', 'updatedAt'])
           )
+          ||
+          (
+            // Eski masterlarda billing maydonlari yo'q — bir marta default bilan to'ldiriladi.
+            // Maydonlar allaqachon mavjud bo'lsa, master ularni o'zgartira olmaydi.
+            resource.data.role == 'master'
+            && !('balance' in resource.data)
+            && request.resource.data.balance == 0
+            && request.resource.data.smsSentCount == 0
+            && request.resource.data.tariff is string
+            && request.resource.data.nextPaymentAt is timestamp
+            && request.resource.data.smsCountMonth is string
+            && request.resource.data.diff(resource.data).affectedKeys()
+                 .hasOnly(['tariff', 'balance', 'nextPaymentAt', 'smsSentCount', 'smsCountMonth', 'updatedAt'])
+          )
         )
       ) || isBigAdmin()
       || (

@@ -21,7 +21,23 @@
     "yes": "Yes",
     "retry": "Retry",
     "no": "No",
-    "confirm": "Confirm"
+    "confirm": "Confirm",
+    "close": "Close",
+    "dayMonth": "{{month}} {{day}}",
+    "months": {
+      "1": "January",
+      "2": "February",
+      "3": "March",
+      "4": "April",
+      "5": "May",
+      "6": "June",
+      "7": "July",
+      "8": "August",
+      "9": "September",
+      "10": "October",
+      "11": "November",
+      "12": "December"
+    }
   },
   "auth": {
     "login": "Sign in",
@@ -171,6 +187,7 @@
     "deleteConfirm": "Delete \"{{name}}\"?",
     "listTitle": "Services",
     "listSubtitle": "List of added services",
+    "addCta": "Add service",
     "masterSubtitle": "Create services for your clients",
     "salonSubtitle": "Create salon-wide services",
     "salonPageSubtitle": "Manage your salon services",
@@ -285,6 +302,39 @@
       "deleteSuccess": "Invitation username deleted",
       "deleteError": "Could not delete. Check Firestore Rules are published.",
       "empty": "No invitations yet. Create one to get started."
+    }
+  },
+  "master": {
+    "tariff": {
+      "title": "Plan",
+      "paymentDate": "Payment date",
+      "plans": {
+        "usta": "MASTER"
+      },
+      "daysLeft": "{{count}} days left until payment. As always, we are with you!",
+      "dueToday": "Payment is due today. Please check your balance.",
+      "overdue": "Payment was due {{count}} days ago"
+    },
+    "balance": {
+      "label": "Balance",
+      "warning": "Please top up your account, otherwise your profile will be blocked",
+      "topUp": "Top up balance",
+      "topUpInfo": "Contact the Smart Salon administrator to top up your balance. It updates automatically once the payment is received."
+    },
+    "sms": {
+      "title": "SMS messages",
+      "label": "SMS sent this month"
+    },
+    "services": {
+      "title": "Your services"
+    },
+    "stats": {
+      "currentMonth": "Current month ({{month}})",
+      "completed": "Completed jobs",
+      "cancelled": "Cancelled",
+      "count": "{{count}}",
+      "details": "Details",
+      "error": "Could not load statistics. Please try again."
     }
   },
   "bookings": {

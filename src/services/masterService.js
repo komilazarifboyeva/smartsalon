@@ -8,6 +8,10 @@ import {
 } from 'firebase/firestore';
 import { db } from '../config/firebase';
 import { fetchUserProfile, userRef } from './userService';
+import {
+  buildMasterBillingDefaults,
+  hasMasterBillingFields,
+} from '../constants/masterBilling';
 
 /**
  * Firestore list query on `users` salon owner uchun qoidalarda ishlamaydi
@@ -36,6 +40,18 @@ export async function listMastersBySalonId(salonId) {
 
   const profiles = await Promise.all(masterUids.map((uid) => fetchUserProfile(uid)));
   return profiles.filter((p) => p && p.role === 'master');
+}
+
+/**
+ * Onboardingdan oldin ro'yxatdan o'tgan masterlarda billing maydonlari yo'q.
+ * Ular birinchi marta Asosiy sahifani ochganda hujjatga default qiymatlarni yozamiz.
+ */
+export async function ensureMasterBillingFields(uid, profile) {
+  if (!uid || hasMasterBillingFields(profile)) return null;
+
+  const defaults = buildMasterBillingDefaults();
+  await updateDoc(userRef(uid), { ...defaults, updatedAt: serverTimestamp() });
+  return defaults;
 }
 
 export async function setMasterDisabled(uid, isDisabled) {

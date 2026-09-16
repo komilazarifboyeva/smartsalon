@@ -4,8 +4,9 @@ import { cn } from '../../utils/cn';
 
 export default function BottomNavbar({ items = [] }) {
   const { t } = useTranslation();
+  const visibleItems = items.filter((item) => item.bottomNav !== false);
 
-  if (!items || items.length === 0) return null;
+  if (visibleItems.length === 0) return null;
 
   return (
     <nav
@@ -13,7 +14,7 @@ export default function BottomNavbar({ items = [] }) {
       aria-label="Bottom navigation"
     >
       <ul className="flex h-16 items-stretch justify-around">
-        {items.map((item) => {
+        {visibleItems.map((item) => {
           const Icon = item.icon;
           return (
             <li key={item.to} className="flex-1">

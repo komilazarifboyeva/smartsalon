@@ -122,6 +122,7 @@ const router = createBrowserRouter([
       { path: 'dashboard', element: <MasterDashboard /> },
       { path: 'reports', element: <MasterReports /> },
       { path: 'bookings', element: <MasterBookings /> },
+      { path: 'sms', element: <ComingSoon titleKey="master.sms.title" /> },
       { path: 'profile', element: <Profile /> },
     ],
   },

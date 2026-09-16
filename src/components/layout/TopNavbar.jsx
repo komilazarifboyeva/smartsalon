@@ -2,7 +2,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { LogIn, LogOut, Sparkles } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
-import { ROUTES } from '../../constants/routes';
+import { ROUTES, profilePathForRole } from '../../constants/routes';
 import { cn } from '../../utils/cn';
 import LangSwitcher from '../common/LangSwitcher';
 import ThemeToggle from '../common/ThemeToggle';
@@ -10,10 +10,23 @@ import { getProfileDisplayName, getProfileInitial, getProfilePhotoURL } from '..
 
 export default function TopNavbar({ links = [], showAuthActions = true }) {
   const { t } = useTranslation();
-  const { isAuthenticated, user, profile, logout } = useAuth();
+  const { isAuthenticated, user, profile, role, logout } = useAuth();
   const displayName = getProfileDisplayName(profile, user);
   const initial = getProfileInitial(profile, user);
   const photoURL = getProfilePhotoURL(profile, user);
+  const profilePath = profilePathForRole(role);
+
+  const avatar = photoURL ? (
+    <img
+      src={photoURL}
+      alt={displayName}
+      className="size-9 rounded-full border border-slate-200 object-cover dark:border-slate-700"
+    />
+  ) : (
+    <div className="size-9 rounded-full bg-brand-100 grid place-items-center text-brand-600 font-semibold">
+      {initial}
+    </div>
+  );
 
   return (
     <header className="sticky top-0 z-40 border-b border-slate-100 bg-white/80 backdrop-blur-lg dark:border-slate-800 dark:bg-slate-950/80">
@@ -55,16 +68,17 @@ export default function TopNavbar({ links = [], showAuthActions = true }) {
           {showAuthActions &&
             (isAuthenticated ? (
               <div className="flex items-center gap-2">
-                {photoURL ? (
-                  <img
-                    src={photoURL}
-                    alt={displayName}
-                    className="size-9 rounded-full border border-slate-200 object-cover dark:border-slate-700"
-                  />
+                {profilePath ? (
+                  <Link
+                    to={profilePath}
+                    aria-label={t('nav.profile')}
+                    title={displayName}
+                    className="rounded-full transition-transform hover:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-950"
+                  >
+                    {avatar}
+                  </Link>
                 ) : (
-                  <div className="size-9 rounded-full bg-brand-100 grid place-items-center text-brand-600 font-semibold">
-                    {initial}
-                  </div>
+                  avatar
                 )}
                 <button
                   type="button"

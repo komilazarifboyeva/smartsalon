@@ -1,6 +1,9 @@
+import { ROLES } from './roles';
+
 export const ROUTES = {
   HOME: '/',
   LOGIN: '/login',
+  UNAUTHORIZED: '/unauthorized',
   ACCOUNT_DISABLED: '/account-disabled',
   NOT_FOUND: '*',
 
@@ -28,6 +31,9 @@ export const ROUTES = {
   MASTER: {
     ROOT: '/master',
     DASHBOARD: '/master/dashboard',
+    BOOKINGS: '/master/bookings',
+    REPORTS: '/master/reports',
+    SMS: '/master/sms',
     PROFILE: '/master/profile',
   },
 
@@ -40,6 +46,17 @@ export const ROUTES = {
     PROFILE: '/me/profile',
   },
 };
+
+export const PROFILE_BY_ROLE = {
+  [ROLES.BIG_ADMIN]: ROUTES.ADMIN.PROFILE,
+  [ROLES.SALON_OWNER]: ROUTES.SALON.PROFILE,
+  [ROLES.MASTER]: ROUTES.MASTER.PROFILE,
+  [ROLES.CUSTOMER]: ROUTES.ME.PROFILE,
+};
+
+export function profilePathForRole(role) {
+  return PROFILE_BY_ROLE[role] ?? null;
+}
 
 export function meSalonDetailPath(username, options = {}) {
   const clean = String(username ?? '').replace(/^@/, '').trim().toLowerCase();

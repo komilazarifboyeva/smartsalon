@@ -16,6 +16,7 @@ import {
 } from './salonService';
 import { userRef } from './userService';
 import { ROLES } from '../constants/roles';
+import { buildMasterBillingDefaults } from '../constants/masterBilling';
 
 const USERNAMES_COLLECTION = 'usernames';
 /** Lotin harflar, raqamlar, defis. Pastki chiziq (_) majburiy emas va shart emas. */
@@ -159,6 +160,7 @@ export async function completeMasterOnboarding({ uid, firstName, lastName, phone
       salonId,
       isDisabled: false,
       onboardingCompleted: true,
+      ...buildMasterBillingDefaults(),
       updatedAt: serverTimestamp(),
     });
   });
